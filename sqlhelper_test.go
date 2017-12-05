@@ -52,7 +52,7 @@ func TestUpdate(t *testing.T) {
 
 	sql := fmt.Sprintf("UPDATE Users SET %s", fields)
 
-	if sql != "UPDATE Users SET Users.Created = ?, Users.Email = ?, Users.ID = ?, Users.Name = ?" {
+	if sql != "UPDATE Users SET Users.Email = ?, Users.Name = ?" {
 		t.Error("incorrect updateFields, ", sql)
 	}
 }
@@ -87,5 +87,4 @@ func TestShowUpdate(t *testing.T) {
 	StructFields("Users", &user{})
 
 	ShowUpdate("Users", "user")
-	t.Error("!")
 }
