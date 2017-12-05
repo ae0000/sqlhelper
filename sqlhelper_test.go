@@ -74,3 +74,18 @@ func TestNoTable(t *testing.T) {
 		t.Error("was expecting fields to be empty, got:", fields)
 	}
 }
+
+func TestShowInsert(t *testing.T) {
+	Reset()
+	StructFields("Users", &user{})
+
+	ShowInsert("Users", "user")
+}
+
+func TestShowUpdate(t *testing.T) {
+	Reset()
+	StructFields("Users", &user{})
+
+	ShowUpdate("Users", "user")
+	t.Error("!")
+}
