@@ -33,13 +33,13 @@ func TestSelect(t *testing.T) {
 	Reset()
 	StructFields("Users", &user{})
 
-	fields := SelectFields("Users")
+	fields := SelectFields("Users", "Users")
 
 	if fields != "Users.ID, Users.Name, Users.Email, Users.Created" {
 		t.Error("incorrect selectFields, ", fields)
 	}
 
-	fields = SelectFields("NotUsers")
+	fields = SelectFields("NotUsers", "blat")
 
 	if fields != "" {
 		t.Error("incorrect selectFields, ", fields)

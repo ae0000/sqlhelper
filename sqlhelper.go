@@ -69,12 +69,12 @@ func StructFields(tableName string, in interface{}) {
 
 // SelectFields returns a tables fields including those excluded in
 // update/insert
-func SelectFields(tableName string) string {
+func SelectFields(tableName, prefix string) string {
 	for _, t := range tables {
 		if t.Name == tableName {
 			sql := ""
 			for _, f := range t.Fields {
-				sql += fmt.Sprintf("%s.%s, ", tableName, f)
+				sql += fmt.Sprintf("%s.%s, ", prefix, f)
 			}
 			return strings.TrimRight(sql, ", ")
 		}
