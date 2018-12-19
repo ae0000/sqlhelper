@@ -28,6 +28,23 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestSelect(t *testing.T) {
+	// Generate the fields (do this on init normally)
+	Reset()
+	StructFields("Users", &user{})
+
+	fields := SelectFields("Users")
+
+	if fields != "Users.ID, Users.Name, Users.Email, Users.Created" {
+		t.Error("incorrect selectFields, ", fields)
+	}
+
+	fields = SelectFields("NotUsers")
+
+	if fields != "" {
+		t.Error("incorrect selectFields, ", fields)
+	}
+}
 func TestInsertEditingIgnoreFields(t *testing.T) {
 	Reset()
 	IgnoreFields = []string{}

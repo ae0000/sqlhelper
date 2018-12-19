@@ -67,6 +67,22 @@ func StructFields(tableName string, in interface{}) {
 	tables = append(tables, t)
 }
 
+// SelectFields returns a tables fields including those excluded in
+// update/insert
+func SelectFields(tableName string) string {
+	for _, t := range tables {
+		if t.Name == tableName {
+			sql := ""
+			for _, f := range t.Fields {
+				sql += fmt.Sprintf("%s.%s, ", tableName, f)
+			}
+			return strings.TrimRight(sql, ", ")
+		}
+	}
+
+	return ""
+}
+
 // InsertFields returns a tables fields except for ID and Created
 func InsertFields(tableName string) (string, string) {
 	for _, t := range tables {
